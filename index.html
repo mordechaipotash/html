@@ -55,14 +55,6 @@
     <header>
         <h1>View HTML Files</h1>
     </header>
-    <main>
-        <iframe id="viewer" src=""></iframe>
-        
-        <div class="navigation">
-            <button id="prevBtn" onclick="prevPage()">Previous</button>
-            <button id="nextBtn" onclick="nextPage()">Next</button>
-        </div>
-    </main>
      }
 
         function nextPage() {
@@ -78,6 +70,15 @@
                 showPage(currentPage);
             }
         }
+    <main>
+        <iframe id="viewer" src=""></iframe>
+        
+        <div class="navigation">
+            <button id="prevBtn" onclick="prevPage()">Previous</button>
+            <button id="nextBtn" onclick="nextPage()">Next</button>
+        </div>
+    </main>
+    
     <footer>
         <p>© 2024 Mordechai Potash</p>
     </footer>
