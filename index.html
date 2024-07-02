@@ -63,6 +63,21 @@
             <button id="nextBtn" onclick="nextPage()">Next</button>
         </div>
     </main>
+     }
+
+        function nextPage() {
+            if (currentPage < files.length - 1) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
     <footer>
         <p>© 2024 Mordechai Potash</p>
     </footer>
