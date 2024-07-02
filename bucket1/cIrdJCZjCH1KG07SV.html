@@ -1,0 +1,183 @@
+<html><head><base href="https://donorship.ai/donor/john-doe"><title>DonorShip AI: Donor Profile - John Doe</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  header {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h1, h2, h3 {
+    color: #0066cc;
+  }
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+  }
+  .profile-section {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .risk-indicator {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .risk-high { background-color: #dc3545; }
+  .chart-container {
+    height: 250px;
+    margin-bottom: 20px;
+  }
+  .button {
+    display: inline-block;
+    background-color: #0066cc;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: #0056b3;
+  }
+  .donor-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .stat-box {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0066cc;
+  }
+  .engagement-meter {
+    width: 100%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .engagement-level {
+    height: 100%;
+    background-color: #28a745;
+    width: 30%; /* This will be dynamically set */
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Donor Profile: John Doe</h1>
+    <div>
+      <span class="risk-indicator risk-high"></span>
+      <strong>High Risk (0.89)</strong>
+    </div>
+  </header>
+
+  <div class="profile-grid">
+    <div class="profile-section">
+      <h2>Donor Information</h2>
+      <p><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb91949395d59f949ebb9e969a9297d5989496">[email&#160;protected]</a></p>
+      <p><strong>Address:</strong> Anytown, USA 12345</p>
+      <p><strong>Donor Since:</strong> March 15, 2018</p>
+      <h3>Engagement Level</h3>
+      <div class="engagement-meter">
+        <div class="engagement-level" style="width: 30%;"></div>
+      </div>
+      <p>Current: Low (30%)</p>
+    </div>
+    <div class="profile-section">
+      <h2>Donation History</h2>
+      <div class="chart-container">
+        <canvas id="donationHistoryChart"></canvas>
+      </div>
+      <div class="donor-stats">
+        <div class="stat-box">
+          <div class="stat-value">$2,500</div>
+          <div>Lifetime Giving</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">$500</div>
+          <div>Largest Gift</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">7</div>
+          <div>Total Donations</div>
+        </div>
+      </div>
+      <h3>Recent Activity</h3>
+      <ul>
+        <li>Last donation: $100 (6 months ago)</li>
+        
+      </ul>
+    </div>
+  </div>
+
+  <div class="profile-section" style="margin-top: 20px;">
+    <h2>AI Insights & Recommendations</h2>
+    <p><strong>Lapse Risk Factors:</strong></p>
+    <ul>
+      <li>Decreasing donation frequency (No donation in last 6 months)</li>
+    </ul>
+    <p><strong>Recommended Actions:</strong></p>
+    <ol>
+    </ol>
+    <a href="/create-reengagement-plan?donor=john-doe" class="button">Create Re-engagement Plan</a>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    var ctxDonation = document.getElementById('donationHistoryChart').getContext('2d');
+    var donationHistoryChart = new Chart(ctxDonation, {
+      type: 'line',
+      data: {
+        labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
+        datasets: [{
+          label: 'Annual Donation Amount',
+          data: [300, 450, 700, 500, 350, 200],
+          borderColor: '#0066cc',
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Donation Amount ($)'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

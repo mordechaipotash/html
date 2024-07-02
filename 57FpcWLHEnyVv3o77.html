@@ -1,0 +1,230 @@
+<html><head><base href="https://donarship.ai/implement/micro-segmentation/update"><title>DonorShip AI - Update Micro-Segmentation Implementation</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    color: #1d1d1f;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f7;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .subtitle {
+    font-size: 18px;
+    color: #86868b;
+  }
+  .update-form {
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .form-section {
+    margin-bottom: 30px;
+  }
+  .section-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #0071e3;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  input[type="range"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .progress-value {
+    font-weight: bold;
+    color: #0071e3;
+  }
+  textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #d2d2d7;
+    border-radius: 8px;
+    resize: vertical;
+  }
+  .action-item {
+    margin-bottom: 10px;
+  }
+  .add-action {
+    background-color: #34c759;
+    color: #ffffff;
+    border: none;
+    border-radius: 980px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  .add-action:hover {
+    background-color: #2db84c;
+  }
+  .submit-button {
+    display: block;
+    width: 100%;
+    background-color: #0071e3;
+    color: #ffffff;
+    border: none;
+    border-radius: 980px;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 30px;
+  }
+  .submit-button:hover {
+    background-color: #0077ed;
+  }
+  .ai-assistant {
+    background-color: #f0f0f0;
+    border-radius: 18px;
+    padding: 20px;
+    margin-top: 30px;
+  }
+  .ai-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #0071e3;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Update Micro-Segmentation Implementation</h1>
+    <div class="subtitle">Track progress and refine your strategy</div>
+  </div>
+  
+  <form class="update-form" method="GET" action="/implement/micro-segmentation/submit-update">
+    <div class="form-section">
+      <div class="section-title">Step 1: Data Gathering and Preparation</div>
+      <label for="step1-progress">Update Progress:</label>
+      <input type="range" id="step1-progress" name="step1-progress" min="0" max="100" value="80">
+      <span class="progress-value">80%</span>
+      
+      <label for="step1-notes">Notes on Progress:</label>
+      <textarea id="step1-notes" name="step1-notes" placeholder="Describe recent progress, challenges, or insights..."></textarea>
+      
+      <div class="action-items">
+        <div class="action-item">
+          <input type="checkbox" id="action1-1" name="action1-1" checked>
+          <label for="action1-1">Integrate social media engagement data</label>
+        </div>
+        <div class="action-item">
+          <input type="checkbox" id="action1-2" name="action1-2">
+          <label for="action1-2">Clean and normalize event attendance records</label>
+        </div>
+        <div class="action-item">
+          <input type="checkbox" id="action1-3" name="action1-3">
+          <label for="action1-3">Verify data quality and completeness</label>
+        </div>
+      </div>
+      <button type="button" class="add-action">+ Add Action Item</button>
+    </div>
+    
+    <div class="form-section">
+      <div class="section-title">Step 2: AI Clustering Algorithm Development</div>
+      <label for="step2-progress">Update Progress:</label>
+      <input type="range" id="step2-progress" name="step2-progress" min="0" max="100" value="60">
+      <span class="progress-value">60%</span>
+      
+      <label for="step2-notes">Notes on Progress:</label>
+      <textarea id="step2-notes" name="step2-notes" placeholder="Describe recent progress, challenges, or insights..."></textarea>
+      
+      <div class="action-items">
+        <div class="action-item">
+          <input type="checkbox" id="action2-1" name="action2-1">
+          <label for="action2-1">Fine-tune hyperparameters for optimal clustering</label>
+        </div>
+        <div class="action-item">
+          <input type="checkbox" id="action2-2" name="action2-2">
+          <label for="action2-2">Conduct cross-validation to ensure model stability</label>
+        </div>
+        <div class="action-item">
+          <input type="checkbox" id="action2-3" name="action2-3">
+          <label for="action2-3">Develop interpretability features for segment insights</label>
+        </div>
+      </div>
+      <button type="button" class="add-action">+ Add Action Item</button>
+    </div>
+    
+    <div class="form-section">
+      <div class="section-title">Step 3: Segment-Specific Messaging Templates</div>
+      <label for="step3-progress">Update Progress:</label>
+      <input type="range" id="step3-progress" name="step3-progress" min="0" max="100" value="40">
+      <span class="progress-value">40%</span>
+      
+      <label for="step3-notes">Notes on Progress:</label>
+      <textarea id="step3-notes" name="step3-notes" placeholder="Describe recent progress, challenges, or insights..."></textarea>
+      
+      <div class="action-items">
+        <div class="action-item">
+          <input type="checkbox" id="action3-1" name="action3-1">
+          <label for="action3-1">Draft messaging for high-potential segments</label>
+        </div>
+        <div class="action-item">
+          <input type="checkbox" id="action3-2" name="action3-2">
+          <label for="action3-2">Collaborate with creative team on visual assets</label>
+        </div>
+        <div class="action-item">
+          <input type="checkbox" id="action3-3" name="action3-3">
+          <label for="action3-3">Set up A/B testing framework for message optimization</label>
+        </div>
+      </div>
+      <button type="button" class="add-action">+ Add Action Item</button>
+    </div>
+    
+    <div class="form-section">
+      <div class="section-title">Step 4: Testing and Refinement</div>
+      <label for="step4-progress">Update Progress:</label>
+      <input type="range" id="step4-progress" name="step4-progress" min="0" max="100" value="20">
+      <span class="progress-value">20%</span>
+      
+      <label for="step4-notes">Notes on Progress:</label>
+      <textarea id="step4-notes" name="step4-notes" placeholder="Describe recent progress, challenges, or insights..."></textarea>
+      
+      <div class="action-items">
+        <div class="action-item">
+          <input type="checkbox" id="action4-1" name="action4-1">
+          <label for="action4-1">Select test group for initial implementation</label>
+        </div>
+        <div class="action-item">
+          <input type="checkbox" id="action4-2" name="action4-2">
+          <label for="action4-2">Set up tracking metrics for segment performance</label>
+        </div>
+        <div class="action-item">
+          <input type="checkbox" id="action4-3" name="action4-3">
+          <label for="action4-3">Prepare feedback collection mechanism for donors</label>
+        </div>
+      </div>
+      <button type="button" class="add-action">+ Add Action Item</button>
+    </div>
+    
+    <button type="submit" class="submit-button">Submit Progress Update</button>
+  </form>
+  
+  <div class="ai-assistant">
+    <div class="ai-title">AI Implementation Assistant</div>
+    <p>Based on your current progress, consider focusing on completing the data integration for social media engagement. This will provide valuable insights for the AI clustering algorithm. Additionally, prioritize the development of interpretability features to gain early insights into emerging donor segments.</p>
+  </div>
+</body>
+</html>

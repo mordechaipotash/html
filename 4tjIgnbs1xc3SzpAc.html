@@ -1,0 +1,144 @@
+<html><head><base href="https://donarship.ai/dashboard"><title>DonorShip AI Dashboard</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    color: #1d1d1f;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f7;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: bold;
+  }
+  .user-info {
+    text-align: right;
+  }
+  .username {
+    font-weight: 600;
+  }
+  .org-name {
+    color: #86868b;
+  }
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .dashboard-card {
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .metric {
+    font-size: 36px;
+    font-weight: bold;
+    color: #0071e3;
+    margin-bottom: 10px;
+  }
+  .metric-description {
+    color: #86868b;
+    font-size: 14px;
+  }
+  .chart-placeholder {
+    background-color: #f0f0f0;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    margin-top: 15px;
+  }
+  .action-button {
+    display: inline-block;
+    background-color: #0071e3;
+    color: #ffffff;
+    border: none;
+    border-radius: 980px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+    text-decoration: none;
+  }
+  .action-button:hover {
+    background-color: #0077ed;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>DonorShip AI Dashboard</h1>
+    <div class="user-info">
+      <div class="username">John Doe</div>
+      <div class="org-name">Acme Nonprofit Foundation</div>
+    </div>
+  </div>
+  
+  <div class="dashboard-grid">
+    <div class="dashboard-card">
+      <div class="card-title">Lapse Score</div>
+      <div class="metric">0.78</div>
+      <div class="metric-description">16.13% improvement since implementation</div>
+      <div class="chart-placeholder">[Lapse Score Trend Chart]</div>
+      <a href="/lapse-score" class="action-button">View Details</a>
+    </div>
+    
+    <div class="dashboard-card">
+      <div class="card-title">Donor Retention Rate</div>
+      <div class="metric">72%</div>
+      <div class="metric-description">8% increase in the last quarter</div>
+      <div class="chart-placeholder">[Retention Rate Chart]</div>
+      <a href="/retention-rate" class="action-button">Analyze</a>
+    </div>
+    
+    <div class="dashboard-card">
+      <div class="card-title">Average Donation Amount</div>
+      <div class="metric">$250</div>
+      <div class="metric-description">15% increase year-over-year</div>
+      <div class="chart-placeholder">[Donation Amount Trend]</div>
+      <a href="/donation-trends" class="action-button">Explore Trends</a>
+    </div>
+    
+    <div class="dashboard-card">
+      <div class="card-title">Donor Segmentation</div>
+      <div class="metric">5 Segments</div>
+      <div class="metric-description">Based on giving patterns and engagement</div>
+      <div class="chart-placeholder">[Segment Distribution Pie Chart]</div>
+      <a href="/donor-segments" class="action-button">View Segments</a>
+    </div>
+    
+    <div class="dashboard-card">
+      <div class="card-title">Campaign Performance</div>
+      <div class="metric">+22%</div>
+      <div class="metric-description">ROI improvement on latest campaign</div>
+      <div class="chart-placeholder">[Campaign Performance Graph]</div>
+      <a href="/campaigns" class="action-button">Campaign Details</a>
+    </div>
+    
+    <div class="dashboard-card">
+      <div class="card-title">Predictive Insights</div>
+      <div class="metric">3 Actions</div>
+      <div class="metric-description">AI-recommended next steps</div>
+      <div class="chart-placeholder">[Action Priority Chart]</div>
+      <a href="/ai-insights" class="action-button">View Insights</a>
+    </div>
+  </div>
+</body>
+</html>

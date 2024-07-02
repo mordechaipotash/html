@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DonorPulse AI High-Value Segment Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        .input-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            flex: 1;
+            margin: 0 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        .results-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .results-column {
+            flex: 1;
+            margin: 0 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .highlight {
+            background-color: #e6f3ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DonorPulse AI High-Value Segment Calculator</h1>
+        <p><strong>Note:</strong> This calculator focuses on the top 25% segment of high-value donors (5,000 donors).</p>
+        <div class="input-section">
+            <div class="input-group">
+                <label for="baseCost">Base Subscription Cost ($):</label>
+                <input type="number" id="baseCost" value="34800" min="0" step="100">
+            </div>
+            <div class="input-group">
+                <label for="increaseConservative">Conservative Reactivation (%):</label>
+                <input type="number" id="increaseConservative" value="3" min="0" max="100" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="increaseModerate">Moderate Reactivation (%):</label>
+                <input type="number" id="increaseModerate" value="7" min="0" max="100" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="increaseOptimistic">Optimistic Reactivation (%):</label>
+                <input type="number" id="increaseOptimistic" value="25" min="0" max="100" step="0.1">
+            </div>
+        </div>
+        <div class="results-container">
+            <div class="results-column">
+                <h2>Conservative</h2>
+                <table id="conservativeTable"></table>
+            </div>
+            <div class="results-column">
+                <h2>Moderate</h2>
+                <table id="moderateTable"></table>
+            </div>
+            <div class="results-column">
+                <h2>Optimistic</h2>
+                <table id="optimisticTable"></table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const highValueDonors = 5000;
+        const avgDonation = 91875.46;
+        const baseLapseScore = 0.93;
+        const predictedAnnualDonation = 2250948.77;
+
+        function calculateMetrics(reactivationPercent, baseCost) {
+            const reactivatedDonors = highValueDonors * (reactivationPercent / 100);
+            const actualDonation = predictedAnnualDonation + (reactivatedDonors * avgDonation * (1 - baseLapseScore));
+            const valueRetained = actualDonation - predictedAnnualDonation;
+            const performanceIncentive = valueRetained * 0.2;
+            const totalCost = baseCost + performanceIncentive;
+            const netBenefit = valueRetained - totalCost;
+            const roi = (netBenefit / totalCost) * 100;
+            const effectiveLapseScore = baseLapseScore - (reactivationPercent / 100 * baseLapseScore);
+
+            return {
+                'Predicted Annual Donation': predictedAnnualDonation.toFixed(2),
+                'Actual Donation Received': actualDonation.toFixed(2),
+                'Value Retained Beyond Prediction': valueRetained.toFixed(2),
+                'Base Subscription Cost': baseCost.toFixed(2),
+                'Performance Incentive (20%)': performanceIncentive.toFixed(2),
+                'Total Annual Cost': totalCost.toFixed(2),
+                'Net Benefit': netBenefit.toFixed(2),
+                'ROI (%)': roi.toFixed(2),
+                'Effective Lapse Score': effectiveLapseScore.toFixed(4),
+                'Donors Reactivated': Math.round(reactivatedDonors),
+                'Reactivation Rate (%)': reactivationPercent.toFixed(2)
+            };
+        }
+
+        function updateTable(tableId, data) {
+            const table = document.getElementById(tableId);
+            table.innerHTML = '<tr><th>Metric</th><th>Value</th></tr>';
+            for (const [key, value] of Object.entries(data)) {
+                const row = table.insertRow(-1);
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                cell1.textContent = key;
+                cell2.textContent = value;
+                if (key === 'Net Benefit' || key === 'ROI (%)') {
+                    row.classList.add('highlight');
+                }
+            }
+        }
+
+        function updateAllTables() {
+            const baseCost = parseFloat(document.getElementById('baseCost').value);
+            const increaseConservative = parseFloat(document.getElementById('increaseConservative').value);
+            const increaseModerate = parseFloat(document.getElementById('increaseModerate').value);
+            const increaseOptimistic = parseFloat(document.getElementById('increaseOptimistic').value);
+
+            updateTable('conservativeTable', calculateMetrics(increaseConservative, baseCost));
+            updateTable('moderateTable', calculateMetrics(increaseModerate, baseCost));
+            updateTable('optimisticTable', calculateMetrics(increaseOptimistic, baseCost));
+        }
+
+        document.getElementById('baseCost').addEventListener('input', updateAllTables);
+        document.getElementById('increaseConservative').addEventListener('input', updateAllTables);
+        document.getElementById('increaseModerate').addEventListener('input', updateAllTables);
+        document.getElementById('increaseOptimistic').addEventListener('input', updateAllTables);
+
+        updateAllTables(); // Initial calculation
+    </script>
+</body>
+</html>

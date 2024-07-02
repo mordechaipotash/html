@@ -1,0 +1,180 @@
+<html><head><base href="https://donorship.ai/donor-risk-analysis"><title>DonorShip AI: Donor Risk Analysis</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  header {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+  h1, h2, h3 {
+    color: #0066cc;
+  }
+  .risk-analysis-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+  }
+  .donor-list, .risk-factors {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .donor-item {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .donor-item:last-child {
+    border-bottom: none;
+  }
+  .risk-indicator {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .risk-high { background-color: #dc3545; }
+  .risk-medium { background-color: #ffc107; }
+  .risk-low { background-color: #28a745; }
+  .button {
+    display: inline-block;
+    background-color: #0066cc;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: #0056b3;
+  }
+  .chart-container {
+    height: 300px;
+    margin-bottom: 20px;
+  }
+  .risk-factor {
+    margin-bottom: 15px;
+  }
+  .risk-factor-name {
+    font-weight: bold;
+  }
+  .risk-factor-weight {
+    float: right;
+    color: #666;
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Donor Risk Analysis</h1>
+    <p>Detailed breakdown of donor lapse risk and contributing factors.</p>
+  </header>
+
+  <div class="risk-analysis-container">
+    <div class="donor-list">
+      <h2>High-Risk Donors</h2>
+      <div class="chart-container">
+        <canvas id="riskDistributionChart"></canvas>
+      </div>
+      <div class="donor-item">
+        <span><span class="risk-indicator risk-high"></span>John Doe</span>
+        <span>Risk Score: 0.89</span>
+        <a href="/donor/john-doe" class="button">View Profile</a>
+      </div>
+      <div class="donor-item">
+        <span><span class="risk-indicator risk-high"></span>Jane Smith</span>
+        <span>Risk Score: 0.85</span>
+        <a href="/donor/jane-smith" class="button">View Profile</a>
+      </div>
+      <div class="donor-item">
+        <span><span class="risk-indicator risk-medium"></span>Bob Johnson</span>
+        <span>Risk Score: 0.72</span>
+        <a href="/donor/bob-johnson" class="button">View Profile</a>
+      </div>
+      <div class="donor-item">
+        <span><span class="risk-indicator risk-medium"></span>Alice Williams</span>
+        <span>Risk Score: 0.68</span>
+        <a href="/donor/alice-williams" class="button">View Profile</a>
+      </div>
+      <div class="donor-item">
+        <span><span class="risk-indicator risk-medium"></span>Charlie Brown</span>
+        <span>Risk Score: 0.65</span>
+        <a href="/donor/charlie-brown" class="button">View Profile</a>
+      </div>
+    </div>
+    <div class="risk-factors">
+      <h2>Risk Factors</h2>
+      <p>Factors contributing to donor lapse risk:</p>
+      <div class="risk-factor">
+        <span class="risk-factor-name">Donation Frequency</span>
+        <span class="risk-factor-weight">25%</span>
+      </div>
+      <div class="risk-factor">
+        <span class="risk-factor-name">Email Engagement</span>
+        <span class="risk-factor-weight">20%</span>
+      </div>
+      <div class="risk-factor">
+        <span class="risk-factor-name">Event Attendance</span>
+        <span class="risk-factor-weight">15%</span>
+      </div>
+      <div class="risk-factor">
+        <span class="risk-factor-name">Donation Amount Trend</span>
+        <span class="risk-factor-weight">15%</span>
+      </div>
+      <div class="risk-factor">
+        <span class="risk-factor-name">Social Media Interaction</span>
+        <span class="risk-factor-weight">10%</span>
+      </div>
+      <div class="risk-factor">
+        <span class="risk-factor-name">Volunteer Participation</span>
+        <span class="risk-factor-weight">10%</span>
+      </div>
+      <div class="risk-factor">
+        <span class="risk-factor-name">Website Visits</span>
+        <span class="risk-factor-weight">5%</span>
+      </div>
+      <h3>AI-Generated Insight</h3>
+      <p>Recent analysis shows that donors with decreased email engagement and event attendance are 3x more likely to lapse within the next 6 months. Consider personalizing outreach to these donors with targeted content based on their past interests and giving history.</p>
+      <a href="/risk-mitigation-strategies" class="button">View Mitigation Strategies</a>
+    </div>
+  </div>
+
+  <script>
+    var ctxRisk = document.getElementById('riskDistributionChart').getContext('2d');
+    var riskDistributionChart = new Chart(ctxRisk, {
+      type: 'pie',
+      data: {
+        labels: ['High Risk', 'Medium Risk', 'Low Risk'],
+        datasets: [{
+          data: [15, 30, 55],
+          backgroundColor: ['#dc3545', '#ffc107', '#28a745']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: 'Donor Risk Distribution'
+        }
+      }
+    });
+  </script>
+</body>
+</html>

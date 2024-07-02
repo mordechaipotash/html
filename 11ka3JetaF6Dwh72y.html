@@ -1,0 +1,262 @@
+<html><head><base href="https://lapselock.israelgives.com/risk-breakdown"><title>LapseLock: At-Risk Donor Breakdown</title>
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+}
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+}
+header {
+    background: #0056b3;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+}
+h1, h2, h3 {
+    margin-bottom: 20px;
+}
+.card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.chart-container {
+    height: 300px;
+    margin-bottom: 20px;
+}
+.risk-category {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.high-risk {
+    background-color: #ffcccb;
+}
+.medium-risk {
+    background-color: #ffffcc;
+}
+.low-risk {
+    background-color: #ccffcc;
+}
+.button {
+    display: inline-block;
+    background: #e8491d;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.button:hover {
+    background: #ff6a00;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header>
+    <h1>LapseLock: At-Risk Donor Breakdown</h1>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>Risk Distribution Overview</h2>
+        <div class="chart-container">
+            <canvas id="riskDistributionChart"></canvas>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Risk Categories</h2>
+        <div class="risk-category high-risk">
+            <h3>High Risk (38 donors)</h3>
+            <p>Donors with no activity in the last 12 months or significant decrease in donation frequency/amount.</p>
+        </div>
+        <div class="risk-category medium-risk">
+            <h3>Medium Risk (57 donors)</h3>
+            <p>Donors with reduced engagement or slight decrease in donation patterns over the last 6-12 months.</p>
+        </div>
+        <div class="risk-category low-risk">
+            <h3>Low Risk (37 donors)</h3>
+            <p>Donors showing early signs of disengagement or minor changes in giving behavior.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Top 10 At-Risk Donors</h2>
+        <table>
+            <tr>
+                <th>Donor ID</th>
+                <th>Risk Level</th>
+                <th>Last Donation</th>
+                <th>Lifetime Value</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>D1058</td>
+                <td>High</td>
+                <td>14 months ago</td>
+                <td>₪250,000</td>
+                <td><a href="https://lapselock.israelgives.com/donor/D1058" class="button">View Profile</a></td>
+            </tr>
+            <tr>
+                <td>D3672</td>
+                <td>High</td>
+                <td>11 months ago</td>
+                <td>₪180,000</td>
+                <td><a href="https://lapselock.israelgives.com/donor/D3672" class="button">View Profile</a></td>
+            </tr>
+            <tr>
+                <td>D2194</td>
+                <td>High</td>
+                <td>13 months ago</td>
+                <td>₪155,000</td>
+                <td><a href="https://lapselock.israelgives.com/donor/D2194" class="button">View Profile</a></td>
+            </tr>
+            <tr>
+                <td>D5821</td>
+                <td>Medium</td>
+                <td>7 months ago</td>
+                <td>₪120,000</td>
+                <td><a href="https://lapselock.israelgives.com/donor/D5821" class="button">View Profile</a></td>
+            </tr>
+            <tr>
+                <td>D4109</td>
+                <td>Medium</td>
+                <td>8 months ago</td>
+                <td>₪110,000</td>
+                <td><a href="https://lapselock.israelgives.com/donor/D4109" class="button">View Profile</a></td>
+            </tr>
+            <tr>
+                <td>D7436</td>
+                <td>High</td>
+                <td>10 months ago</td>
+                <td>₪95,000</td>
+                <td><a href="https://lapselock.israelgives.com/donor/D7436" class="button">View Profile</a></td>
+            </tr>
+            <tr>
+                <td>D9012</td>
+                <td>Medium</td>
+                <td>6 months ago</td>
+                <td>₪85,000</td>
+                <td><a href="https://lapselock.israelgives.com/donor/D9012" class="button">View Profile</a></td>
+            </tr>
+            <tr>
+                <td>D6284</td>
+                <td>Low</td>
+                <td>4 months ago</td>
+                <td>₪80,000</td>
+                <td><a href="https://lapselock.israelgives.com/donor/D6284" class="button">View Profile</a></td>
+            </tr>
+            <tr>
+                <td>D8751</td>
+                <td>Medium</td>
+                <td>9 months ago</td>
+                <td>₪75,000</td>
+                <td><a href="https://lapselock.israelgives.com/donor/D8751" class="button">View Profile</a></td>
+            </tr>
+            <tr>
+                <td>D3920</td>
+                <td>High</td>
+                <td>12 months ago</td>
+                <td>₪70,000</td>
+                <td><a href="https://lapselock.israelgives.com/donor/D3920" class="button">View Profile</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Risk Factors Analysis</h2>
+        <div class="chart-container">
+            <canvas id="riskFactorsChart"></canvas>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Next Steps</h2>
+        <p>1. Prioritize outreach to high-risk donors, especially those with high lifetime values.</p>
+        <p>2. Develop targeted re-engagement campaigns based on identified risk factors.</p>
+        <p>3. Conduct in-depth analysis of medium-risk donors to prevent escalation to high-risk.</p>
+        <p>4. Implement proactive measures for low-risk donors to maintain their engagement.</p>
+        <a href="https://lapselock.israelgives.com/action-plan" class="button">Update Action Plan</a>
+        <a href="https://lapselock.israelgives.com/dashboard" class="button">Return to Dashboard</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Risk Distribution Chart
+    var ctx = document.getElementById('riskDistributionChart').getContext('2d');
+    var riskDistributionChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['High Risk', 'Medium Risk', 'Low Risk'],
+            datasets: [{
+                data: [38, 57, 37],
+                backgroundColor: ['#ff6384', '#ffcd56', '#4bc0c0']
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Risk Distribution of At-Risk Donors'
+            }
+        }
+    });
+
+    // Risk Factors Chart
+    var ctx2 = document.getElementById('riskFactorsChart').getContext('2d');
+    var riskFactorsChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Inactivity', 'Decreased Frequency', 'Reduced Amount', 'Engagement Decline', 'Communication Unresponsiveness'],
+            datasets: [{
+                label: 'Impact on Risk Score',
+                data: [85, 72, 68, 56, 43],
+                backgroundColor: '#36a2eb'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            },
+            title: {
+                display: true,
+                text: 'Impact of Risk Factors on Donor Risk Score'
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
