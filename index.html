@@ -55,15 +55,17 @@
     <header>
         <h1>View HTML Files</h1>
     </header>
-    <div class="navigation">
-        <button id="prevBtn" onclick="prevPage()">Previous</button>
-        <button id="nextBtn" onclick="nextPage()">Next</button>
-        <p id="currentPageLink"></p>
-    </div>
+    <main>
+        <div class="navigation">
+            <button id="prevBtn" onclick="prevPage()">Previous</button>
+            <button id="nextBtn" onclick="nextPage()">Next</button>
+            <p id="currentPageLink"></p>
+        </div>
 
-    <iframe id="viewer" src=""></iframe>
+        <iframe id="viewer" src=""></iframe>
+    </main>
     <footer>
-        <p>© 2024 FutureDonor OR DonorFuture</p>
+        <p>© 2024 Mordechai Potash</p>
     </footer>
     <script>
         const files = [
@@ -118,7 +120,9 @@
 
         function showPage(page) {
             const viewer = document.getElementById('viewer');
+            const currentPageLink = document.getElementById('currentPageLink');
             viewer.src = files[page];
+            currentPageLink.innerHTML = `<a href="${files[page]}" target="_blank">https://mordechajpotash.github.io/html/${files[page]}</a>`;
         }
 
         function nextPage() {
