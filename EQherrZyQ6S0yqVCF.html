@@ -1,0 +1,276 @@
+<html><head><base href="https://donorship.ai/segment-optimizer"><title>DonorShip AI: Segment Optimizer</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  header {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+  h1, h2, h3 {
+    color: #0066cc;
+  }
+  .optimizer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  .optimizer-item {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .chart-container {
+    height: 250px;
+    margin-bottom: 20px;
+  }
+  .button {
+    display: inline-block;
+    background-color: #0066cc;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: #0056b3;
+  }
+  .ai-insight {
+    background-color: #e6f3ff;
+    border-left: 5px solid #0066cc;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 0.9em;
+  }
+  .segment-slider {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .segment-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .segment-stat {
+    text-align: center;
+  }
+  .segment-stat-value {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #0066cc;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f8f9fa;
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Segment Optimizer</h1>
+    <p>Fine-tune your donor segments for maximum campaign impact and personalized engagement.</p>
+  </header>
+
+  <div class="optimizer-grid">
+    <div class="optimizer-item">
+      <h2>Segment Distribution</h2>
+      <div class="chart-container">
+        <canvas id="segmentDistributionChart"></canvas>
+      </div>
+      <div class="ai-insight">
+        <strong>AI Insight:</strong> Your current segment distribution shows a healthy mix, but there's potential to grow the 'Major Donors' segment. Consider implementing a targeted upgrade strategy for high-potential 'Repeat Donors'.
+      </div>
+    </div>
+    <div class="optimizer-item">
+      <h2>Segment Performance</h2>
+      <div class="chart-container">
+        <canvas id="segmentPerformanceChart"></canvas>
+      </div>
+      <div class="ai-insight">
+        <strong>AI Insight:</strong> While 'Major Donors' contribute the highest average donation, 'Repeat Donors' show the best retention rates. Focus on cultivating loyalty among 'Repeat Donors' to ensure long-term stability.
+      </div>
+    </div>
+    <div class="optimizer-item">
+      <h2>Lapsed Donor Reactivation</h2>
+      <h3>Current Reactivation Rate: 15%</h3>
+      <input type="range" min="0" max="100" value="15" class="segment-slider" id="lapsedDonorSlider">
+      <div class="segment-stats">
+        <div class="segment-stat">
+          <div>Potential Donors</div>
+          <div class="segment-stat-value" id="potentialLapsedDonors">2,500</div>
+        </div>
+        <div class="segment-stat">
+          <div>Estimated Value</div>
+          <div class="segment-stat-value" id="lapsedDonorValue">$75,000</div>
+        </div>
+      </div>
+      <div class="ai-insight">
+        <strong>AI Insight:</strong> <span id="lapsedDonorInsight">Increasing the reactivation rate to 20% could yield an additional $25,000 in donations. Our AI suggests a personalized re-engagement campaign focusing on donors' past interests and giving history.</span>
+      </div>
+    </div>
+    <div class="optimizer-item">
+      <h2>New Donor Acquisition</h2>
+      <h3>Current Acquisition Cost: $50</h3>
+      <input type="range" min="20" max="100" value="50" class="segment-slider" id="acquisitionCostSlider">
+      <div class="segment-stats">
+        <div class="segment-stat">
+          <div>Target New Donors</div>
+          <div class="segment-stat-value" id="targetNewDonors">1,000</div>
+        </div>
+        <div class="segment-stat">
+          <div>Budget Required</div>
+          <div class="segment-stat-value" id="acquisitionBudget">$50,000</div>
+        </div>
+      </div>
+      <div class="ai-insight">
+        <strong>AI Insight:</strong> <span id="acquisitionInsight">Your current acquisition cost is within industry standards. By leveraging AI-driven targeting, we estimate you could reduce this to $40 per donor, allowing you to acquire more donors within the same budget.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="optimizer-item">
+    <h2>Segment Optimization Recommendations</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Segment</th>
+          <th>Current Size</th>
+          <th>Recommended Size</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>New Donors</td>
+          <td>30%</td>
+          <td>35%</td>
+          <td>Increase acquisition efforts</td>
+        </tr>
+        <tr>
+          <td>Repeat Donors</td>
+          <td>45%</td>
+          <td>40%</td>
+          <td>Focus on upgrade strategies</td>
+        </tr>
+        <tr>
+          <td>Major Donors</td>
+          <td>10%</td>
+          <td>15%</td>
+          <td>Implement targeted cultivation</td>
+        </tr>
+        <tr>
+          <td>Lapsed Donors</td>
+          <td>15%</td>
+          <td>10%</td>
+          <td>Enhance reactivation campaigns</td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="/create-optimization-plan" class="button">Create Optimization Plan</a>
+  </div>
+
+  <script>
+    // Segment Distribution Chart
+    var ctxDistribution = document.getElementById('segmentDistributionChart').getContext('2d');
+    var segmentDistributionChart = new Chart(ctxDistribution, {
+      type: 'pie',
+      data: {
+        labels: ['New Donors', 'Repeat Donors', 'Major Donors', 'Lapsed Donors'],
+        datasets: [{
+          data: [30, 45, 10, 15],
+          backgroundColor: ['#4e79a7', '#f28e2c', '#e15759', '#76b7b2']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: 'Current Segment Distribution'
+        }
+      }
+    });
+
+    // Segment Performance Chart
+    var ctxPerformance = document.getElementById('segmentPerformanceChart').getContext('2d');
+    var segmentPerformanceChart = new Chart(ctxPerformance, {
+      type: 'bar',
+      data: {
+        labels: ['New Donors', 'Repeat Donors', 'Major Donors', 'Lapsed Donors'],
+        datasets: [{
+          label: 'Average Donation ($)',
+          data: [50, 150, 1000, 25],
+          backgroundColor: '#4e79a7'
+        }, {
+          label: 'Retention Rate (%)',
+          data: [20, 60, 80, 5],
+          backgroundColor: '#f28e2c'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Interactive elements
+    document.getElementById('lapsedDonorSlider').addEventListener('input', function(event) {
+      var rate = event.target.value;
+      document.getElementById('potentialLapsedDonors').textContent = Math.round(2500 * (rate / 100));
+      document.getElementById('lapsedDonorValue').textContent = '$' + (Math.round(2500 * (rate / 100) * 30)).toLocaleString();
+      
+      var insight = document.getElementById('lapsedDonorInsight');
+      if (rate < 10) {
+        insight.textContent = "Your current reactivation rate is below average. Consider implementing a multi-channel re-engagement strategy to improve results.";
+      } else if (rate < 20) {
+        insight.textContent = "Your reactivation efforts are showing promise. To further improve, try segmenting lapsed donors based on their past giving history and interests.";
+      } else {
+        insight.textContent = "Excellent reactivation rate! To maintain this performance, consider implementing a 'win-back' program with personalized incentives for lapsed donors.";
+      }
+    });
+
+    document.getElementById('acquisitionCostSlider').addEventListener('input', function(event) {
+      var cost = event.target.value;
+      document.getElementById('targetNewDonors').textContent = Math.round(50000 / cost);
+      document.getElementById('acquisitionBudget').textContent = '$50,000';
+      
+      var insight = document.getElementById('acquisitionInsight');
+      if (cost > 60) {
+        insight.textContent = "Your acquisition cost is higher than average. Consider refining your targeting criteria and testing different channels to reduce costs.";
+      } else if (cost > 40) {
+        insight.textContent = "Your acquisition cost is within industry standards. There's still room for improvement - try A/B testing your acquisition messages to increase efficiency.";
+      } else {
+        insight.textContent = "Your acquisition cost is impressively low! Focus on scaling your successful strategies while maintaining this efficiency.";
+      }
+    });
+  </script>
+</body>
+</html>

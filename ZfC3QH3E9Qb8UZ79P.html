@@ -1,0 +1,206 @@
+<html><head><base href="https://donorship.ai/message-personalizer">
+<title>DonorShip AI: Message Personalizer</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  header {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+  h1, h2, h3 {
+    color: #0066cc;
+  }
+  .personalizer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  .personalizer-item {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .button {
+    display: inline-block;
+    background-color: #0066cc;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  .button:hover {
+    background-color: #0056b3;
+  }
+  .ai-insight {
+    background-color: #e6f3ff;
+    border-left: 5px solid #0066cc;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 0.9em;
+  }
+  textarea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+  }
+  select, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+  }
+  .tag {
+    display: inline-block;
+    background-color: #e9ecef;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    font-size: 0.9em;
+  }
+  #previewMessage {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 15px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Message Personalizer</h1>
+    <p>Craft highly personalized donor messages using AI-driven insights and real-time data.</p>
+  </header>
+
+  <div class="personalizer-grid">
+    <div class="personalizer-item">
+      <h2>Donor Segment Selection</h2>
+      <select id="donorSegment">
+        <option value="new">New Donors</option>
+        <option value="repeat">Repeat Donors</option>
+        <option value="major">Major Donors</option>
+        <option value="lapsed">Lapsed Donors</option>
+      </select>
+      <div class="ai-insight">
+        <strong>AI Insight:</strong> <span id="segmentInsight">Select a donor segment to see tailored messaging recommendations.</span>
+      </div>
+    </div>
+
+    <div class="personalizer-item">
+      <h2>Personalization Tags</h2>
+      <div id="personalizationTags">
+        <span class="tag">{DONOR_NAME}</span>
+        <span class="tag">{LAST_DONATION_AMOUNT}</span>
+        <span class="tag">{LAST_DONATION_DATE}</span>
+        <span class="tag">{FAVORITE_PROGRAM}</span>
+        <span class="tag">{TOTAL_IMPACT}</span>
+      </div>
+      <p>Click on a tag to insert it into your message.</p>
+    </div>
+
+    <div class="personalizer-item">
+      <h2>Message Template</h2>
+      <textarea id="messageTemplate">Dear {DONOR_NAME},
+
+Thank you for your continued support. Your last gift of {LAST_DONATION_AMOUNT} on {LAST_DONATION_DATE} made a real difference in our {FAVORITE_PROGRAM} program.
+
+To date, your total impact has been {TOTAL_IMPACT}. We're grateful for your partnership in our mission.
+
+Would you consider making another gift today to help us reach our campaign goal?
+
+Best regards,
+The Fundraising Team</textarea>
+      <button class="button" onclick="generateMessage()">Generate Personalized Message</button>
+    </div>
+
+    <div class="personalizer-item">
+      <h2>Message Preview</h2>
+      <div id="previewMessage">
+        Personalized message will appear here...
+      </div>
+      <div class="ai-insight">
+        <strong>AI Insight:</strong> <span id="messageInsight">Personalized messages typically see 20-30% higher engagement rates compared to generic communications.</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function generateMessage() {
+      var segment = document.getElementById('donorSegment').value;
+      var template = document.getElementById('messageTemplate').value;
+      var preview = document.getElementById('previewMessage');
+      var insight = document.getElementById('messageInsight');
+      
+      // Simulating personalization with mock data
+      var personalizedMessage = template
+        .replace('{DONOR_NAME}', 'John Doe')
+        .replace('{LAST_DONATION_AMOUNT}', '$500')
+        .replace('{LAST_DONATION_DATE}', 'June 15, 2023')
+        .replace('{FAVORITE_PROGRAM}', 'Youth Education')
+        .replace('{TOTAL_IMPACT}', '$2,500 supporting 10 students');
+      
+      preview.innerHTML = personalizedMessage;
+      
+      // Update AI insight based on segment
+      switch(segment) {
+        case 'new':
+          insight.textContent = "For new donors, focus on the immediate impact of their first gift to encourage a second donation.";
+          break;
+        case 'repeat':
+          insight.textContent = "Repeat donors respond well to cumulative impact statements. Consider adding more details about long-term program outcomes.";
+          break;
+        case 'major':
+          insight.textContent = "Major donors appreciate exclusivity. Mention upcoming donor events or offer a personal meeting with program directors.";
+          break;
+        case 'lapsed':
+          insight.textContent = "For lapsed donors, highlight recent organizational achievements they may have missed. A gentle reminder of their past support can be effective.";
+          break;
+      }
+    }
+
+    // Event listeners for donor segment selection and personalization tags
+    document.getElementById('donorSegment').addEventListener('change', function(event) {
+      var segmentInsight = document.getElementById('segmentInsight');
+      switch(event.target.value) {
+        case 'new':
+          segmentInsight.textContent = "New donors are eager to see the impact of their first gift. Focus on immediate outcomes and future potential.";
+          break;
+        case 'repeat':
+          segmentInsight.textContent = "Repeat donors value consistency. Highlight their ongoing impact and introduce them to new programs they might be interested in.";
+          break;
+        case 'major':
+          segmentInsight.textContent = "Major donors appreciate detailed impact reports and personal recognition. Consider offering exclusive insights or experiences.";
+          break;
+        case 'lapsed':
+          segmentInsight.textContent = "Lapsed donors need to be re-engaged. Remind them of their past impact and share exciting new developments since their last gift.";
+          break;
+      }
+    });
+
+    document.querySelectorAll('.tag').forEach(tag => {
+      tag.addEventListener('click', function() {
+        var messageTemplate = document.getElementById('messageTemplate');
+        messageTemplate.value += this.textContent;
+      });
+    });
+  </script>
+</body>
+</html>

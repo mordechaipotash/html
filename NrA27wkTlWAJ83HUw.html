@@ -1,0 +1,211 @@
+<html><head><base href="https://donorship.ai/implement-plan?donor=john-doe"><title>DonorShip AI: Implement Re-engagement Plan for John Doe</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  header {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+  h1, h2, h3 {
+    color: #0066cc;
+  }
+  .implementation-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+  }
+  .implementation-section, .ai-assistant {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .action-item {
+    border-left: 4px solid #0066cc;
+    padding-left: 15px;
+    margin-bottom: 20px;
+  }
+  .action-item h3 {
+    margin-bottom: 10px;
+  }
+  .status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+  }
+  .status-pending {
+    background-color: #ffc107;
+    color: #000;
+  }
+  .status-in-progress {
+    background-color: #17a2b8;
+    color: #fff;
+  }
+  .status-completed {
+    background-color: #28a745;
+    color: #fff;
+  }
+  .button {
+    display: inline-block;
+    background-color: #0066cc;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+  .button:hover {
+    background-color: #0056b3;
+  }
+  .progress-bar {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  .progress {
+    width: 20%;
+    height: 20px;
+    background-color: #28a745;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+  }
+  .ai-message {
+    background-color: #e6f3ff;
+    border-left: 4px solid #0066cc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Implement Re-engagement Plan: John Doe</h1>
+    <p>Track and manage the implementation of the customized re-engagement strategy.</p>
+  </header>
+
+  <div class="implementation-container">
+    <div class="implementation-section">
+      <h2>30-Day Re-engagement Plan Progress</h2>
+      
+      <div class="action-item">
+        <h3>1. Personalized Impact Email</h3>
+        <p><strong>Due Date:</strong> May 1, 2023</p>
+        <p><strong>Status:</strong> <span class="status status-in-progress">In Progress</span></p>
+        <p><strong>Next Steps:</strong> Finalize email content and send for approval.</p>
+        <button class="button" onclick="updateStatus(this, 'completed')">Mark as Completed</button>
+      </div>
+
+      <div class="action-item">
+        <h3>2. Exclusive Donor Appreciation Event Invitation</h3>
+        <p><strong>Due Date:</strong> May 8, 2023</p>
+        <p><strong>Status:</strong> <span class="status status-pending">Pending</span></p>
+        <p><strong>Next Steps:</strong> Design invitation and prepare event details.</p>
+        <button class="button" onclick="updateStatus(this, 'in-progress')">Start Task</button>
+      </div>
+
+      <div class="action-item">
+        <h3>3. Personal Phone Call</h3>
+        <p><strong>Due Date:</strong> May 15, 2023</p>
+        <p><strong>Status:</strong> <span class="status status-pending">Pending</span></p>
+        <p><strong>Next Steps:</strong> Brief senior staff member and schedule call.</p>
+        <button class="button" onclick="updateStatus(this, 'in-progress')">Start Task</button>
+      </div>
+
+      <div class="action-item">
+        <h3>4. Tailored Giving Opportunity</h3>
+        <p><strong>Due Date:</strong> May 22, 2023</p>
+        <p><strong>Status:</strong> <span class="status status-pending">Pending</span></p>
+        <p><strong>Next Steps:</strong> Await insights from phone call to customize offer.</p>
+        <button class="button" disabled>Start Task</button>
+      </div>
+
+      <div class="action-item">
+        <h3>5. Follow-up and Feedback</h3>
+        <p><strong>Due Date:</strong> May 29, 2023</p>
+        <p><strong>Status:</strong> <span class="status status-pending">Pending</span></p>
+        <p><strong>Next Steps:</strong> Prepare feedback questions and follow-up template.</p>
+        <button class="button" disabled>Start Task</button>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress">20% Complete</div>
+      </div>
+    </div>
+
+    <div class="ai-assistant">
+      <h2>AI Implementation Assistant</h2>
+      <div class="ai-message">
+        <p><strong>Current Focus:</strong> Personalized Impact Email</p>
+        <p>Based on John's giving history and interests, consider highlighting our recent education initiative in underserved communities. Include statistics on improved graduation rates and a personal story from a beneficiary.</p>
+      </div>
+      <div class="ai-message">
+        <p><strong>Engagement Tip:</strong> John's open rates are higher for emails sent in the morning. Aim to send the impact email between 9-10 AM for best results.</p>
+      </div>
+      <div class="ai-message">
+        <p><strong>Next Action:</strong> Once the impact email is sent, monitor open and click-through rates. If not opened within 48 hours, consider a gentle follow-up or alternate contact method.</p>
+      </div>
+      <form id="ai-query-form">
+        <input type="text" id="ai-query" placeholder="Ask for implementation advice..." style="width: 70%; padding: 10px; margin-right: 10px;">
+        <button type="submit" class="button">Get AI Insight</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function updateStatus(button, newStatus) {
+      const statusSpan = button.parentElement.querySelector('.status');
+      statusSpan.className = 'status status-' + newStatus;
+      statusSpan.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1).replace('-', ' ');
+      
+      if (newStatus === 'completed') {
+        button.disabled = true;
+        button.textContent = 'Completed';
+      } else if (newStatus === 'in-progress') {
+        button.textContent = 'Mark as Completed';
+        button.onclick = function() { updateStatus(this, 'completed'); };
+      }
+      
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const totalItems = document.querySelectorAll('.action-item').length;
+      const completedItems = document.querySelectorAll('.status-completed').length;
+      const progressPercentage = (completedItems / totalItems) * 100;
+      
+      const progressBar = document.querySelector('.progress');
+      progressBar.style.width = progressPercentage + '%';
+      progressBar.textContent = Math.round(progressPercentage) + '% Complete';
+    }
+
+    document.getElementById('ai-query-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const query = document.getElementById('ai-query').value;
+      // In a real implementation, this would send the query to the AI and get a response
+      const aiResponse = `Based on your query "${query}", I suggest...`;
+      const aiMessage = document.createElement('div');
+      aiMessage.className = 'ai-message';
+      aiMessage.innerHTML = `<p><strong>AI Response:</strong> ${aiResponse}</p>`;
+      this.parentElement.insertBefore(aiMessage, this);
+      document.getElementById('ai-query').value = '';
+    });
+  </script>
+</body>
+</html>
