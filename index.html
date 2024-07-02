@@ -55,14 +55,13 @@
     <header>
         <h1>View HTML Files</h1>
     </header>
-    <main>
-        <div class="navigation">
-            <button id="prevBtn" onclick="prevPage()">Previous</button>
-            <button id="nextBtn" onclick="nextPage()">Next</button>
-        </div>
+    <div class="navigation">
+        <button id="prevBtn" onclick="prevPage()">Previous</button>
+        <button id="nextBtn" onclick="nextPage()">Next</button>
+        <p id="currentPageLink"></p>
+    </div>
 
-        <iframe id="viewer" src=""></iframe>
-    </main>
+    <iframe id="viewer" src=""></iframe>
     <footer>
         <p>© 2024 FutureDonor OR DonorFuture</p>
     </footer>
