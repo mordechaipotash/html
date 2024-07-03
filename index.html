@@ -1,5 +1,4 @@
-<html><head>
-<title>DonorShip AI - Professional Dashboard</title>
+<html><head><title>DonorShip AI - Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -10,6 +9,9 @@
     --background: #f5f7fa;
     --text: #333;
     --card-bg: #ffffff;
+    --success: #4CAF50;
+    --warning: #FFC107;
+    --danger: #F44336;
   }
 
   * {
@@ -26,7 +28,7 @@
   }
 
   .container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
   }
@@ -63,382 +65,138 @@
     text-decoration: none;
     color: white;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
   }
 
   nav ul li a:hover {
     color: var(--accent);
-  }
-
-  .user-profile {
-    display: flex;
-    align-items: center;
-  }
-
-  .badge {
-    width: 30px;
-    height: 30px;
-    margin-left: 10px;
-    background-color: var(--accent);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .badge:hover::after {
-    content: attr(data-title);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0,0,0,0.8);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-  }
-
-  .dashboard {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-  }
-
-  .card {
-    background-color: var(--card-bg);
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-  }
-
-  .card:hover {
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    transform: translateY(-5px);
-  }
-
-  .card h2 {
-    color: var(--primary);
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-  }
-
-  .lapse-score {
-    text-align: center;
-  }
-
-  .semi-circle {
-    width: 200px;
-    height: 100px;
-    background-color: #e0e0e0;
-    border-radius: 100px 100px 0 0;
-    position: relative;
-    overflow: hidden;
-    margin: 20px auto;
-  }
-
-  .semi-circle::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 200%;
-    background-color: var(--accent);
-    transform-origin: center bottom;
-    transform: rotate(calc(1deg * (72 * 180 / 100)));
-  }
-
-  .score {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  .spark-line {
-    width: 100%;
-    height: 50px;
-    margin-top: 20px;
-  }
-
-  .donor-engagement-timeline {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-  }
-
-  .timeline-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    transition: transform 0.3s ease;
-  }
-
-  .event {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 24px;
-    cursor: pointer;
-  }
-
-  .event::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    background-color: currentColor;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .event.donation { color: green; }
-  .event.email { color: blue; }
-  .event.event-attendance { color: purple; }
-  .event.volunteer { color: orange; }
-
-  .event:hover::after {
-    content: attr(data-details);
-    position: absolute;
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #fff;
-    border: 1px solid #ccc;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 14px;
-    white-space: nowrap;
-    z-index: 1000;
-  }
-
-  .timeline-controls {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-
-  .timeline-controls button {
-    background-color: var(--accent);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .goals-targets {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-
-  .circular-progress {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: conic-gradient(var(--accent) 0deg, #e0e0e0 0deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 15px;
-  }
-
-  .circular-progress::before {
-    content: attr(data-value) '%';
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-  .prediction-card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px 0;
-  }
-
-  .prediction-chart {
-    width: 100%;
-    height: 50px;
-    margin: 10px 0;
-  }
-
-  .confidence-indicator {
-    width: 100%;
-    height: 5px;
-    background-color: #e0e0e0;
-    margin-top: 10px;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-
-  .confidence-indicator::before {
-    content: '';
-    display: block;
-    height: 100%;
-    background-color: var(--accent);
-  }
-
-  .best-practice-card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 15px 0;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .best-practice-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-
-  .card-header h3 {
-    margin-bottom: 10px;
-  }
-
-  .card-details .more-details {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-
-  .card-details.expanded .more-details {
-    max-height: 500px;
-  }
-
-  .card-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-  }
-
-  .btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    font-weight: 500;
-  }
-
-  .btn:hover {
     transform: translateY(-2px);
   }
 
-  .btn-adopt {
-    background-color: var(--accent);
-    color: white;
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
   }
 
-  .btn-adopt:hover {
-    background-color: var(--secondary);
+  .dashboard-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
 
-  .btn-dismiss {
-    background-color: #e0e0e0;
+  .dashboard-card h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--primary);
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-size: 14px;
     color: var(--text);
   }
 
-  .btn-dismiss:hover {
-    background-color: #c0c0c0;
+  .chart-container {
+    width: 100%;
+    height: 300px;
+    margin-top: 20px;
   }
 
-  .btn-learn-more {
-    background-color: var(--light);
-    color: white;
+  .ai-insights {
+    background-color: #e6f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 15px;
+    margin-top: 20px;
   }
 
-  .btn-learn-more:hover {
-    background-color: var(--accent);
+  .ai-insights h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
   }
 
-  .search-bar {
-    display: flex;
-    align-items: center;
-    position: relative;
+  .ai-insights ul {
+    padding-left: 20px;
   }
 
-  .search-bar input {
-    padding: 10px 15px;
+  .btn {
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
-    font-size: 14px;
-    width: 250px;
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-    transition: background-color 0.3s ease;
-  }
-
-  .search-bar input:focus {
-    background-color: rgba(255,255,255,0.2);
-    outline: none;
-  }
-
-  .search-bar input::placeholder {
-    color: rgba(255,255,255,0.7);
-  }
-
-  .autocomplete {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    z-index: 1000;
-    display: none;
-  }
-
-  .autocomplete div {
-    padding: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.3s ease;
   }
 
-  .autocomplete div:hover {
-    background-color: #f5f5f5;
+  .btn-primary {
+    background-color: var(--accent);
+    color: white;
   }
 
-  .heatmap {
-    width: 100%;
-    height: 200px;
-    background-color: #f0f0f0;
+  .btn-primary:hover {
+    background-color: var(--secondary);
+    transform: translateY(-2px);
+  }
+
+  .recent-activities {
     margin-top: 20px;
   }
 
-  .word-cloud {
-    width: 100%;
-    height: 200px;
-    background-color: #f0f0f0;
-    margin-top: 20px;
+  .activity-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+  }
+
+  .activity-icon i {
+    color: white;
+    font-size: 20px;
+  }
+
+  .activity-details {
+    flex-grow: 1;
+  }
+
+  .activity-time {
+    font-size: 12px;
+    color: #777;
   }
 
   @media (max-width: 768px) {
-    .dashboard {
+    .dashboard-grid {
       grid-template-columns: 1fr;
     }
-    
+
     .header-content {
       flex-direction: column;
       align-items: flex-start;
@@ -446,23 +204,11 @@
 
     nav ul {
       margin-top: 15px;
-    }
-
-    .search-bar {
-      margin-top: 15px;
-      width: 100%;
-    }
-
-    .search-bar input {
-      width: 100%;
-    }
-
-    .user-profile {
-      margin-top: 15px;
+      flex-wrap: wrap;
     }
   }
 </style>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header>
@@ -470,62 +216,230 @@
       <div class="logo">DonorShip AI</div>
       <nav>
         <ul>
-          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
           <li><a href="donors.html">Donors</a></li>
           <li><a href="campaigns.html">Campaigns</a></li>
           <li><a href="reports.html">Reports</a></li>
-          <li><a href="/settings">Settings</a></li>
+          <li><a href="settings.html">Settings</a></li>
         </ul>
       </nav>
-      <div class="search-bar">
-        <input type="text" placeholder="Search donors or campaigns...">
-        <div class="autocomplete"></div>
-      </div>
-      <div class="user-profile">
-        <div class="badge" data-title="Top Donor"><i class="fas fa-trophy"></i></div>
-        <div class="badge" data-title="Engagement Expert"><i class="fas fa-star"></i></div>
-        <div class="badge" data-title="Volunteer Hero"><i class="fas fa-hands-helping"></i></div>
-      </div>
     </div>
   </header>
 
   <div class="container">
-    <div class="dashboard">
-      <div class="card lapse-score">
-        <h2>Lapse Score</h2>
-        <div class="semi-circle">
-          <div class="score">72</div>
-        </div>
-        <p>Trend: Improving</p>
-        <p>Prediction: 68 | Confidence: 85%</p>
-        <div class="spark-line"></div>
-        <p>The Lapse Score indicates the likelihood of donor retention. A higher score means lower risk of lapsing.</p>
-      </div>
-
-      <div class="card">
-        <h2>Donor Engagement Timeline</h2>
-        <div class="donor-engagement-timeline">
-          <div class="timeline-container">
-            <!-- Timeline events will be populated here dynamically -->
+    <h1>Dashboard</h1>
+    
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <h2>Donation Overview</h2>
+        <div class="stat-grid">
+          <div class="stat-item">
+            <div class="stat-value">$145,678</div>
+            <div class="stat-label">Total Donations</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">1,234</div>
+            <div class="stat-label">Total Donors</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">$118</div>
+            <div class="stat-label">Avg. Donation</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">23%</div>
+            <div class="stat-label">Growth Rate</div>
           </div>
         </div>
-        <div class="timeline-controls">
-          <button id="zoom-out">-</button>
-          <button id="zoom-in">+</button>
-          <button id="pan-left">&lt;</button>
-          <button id="pan-right">&gt;</button>
+        <div class="chart-container">
+          <canvas id="donationChart"></canvas>
         </div>
       </div>
-
-      <div class="card">
-        <h2>Goals and Targets</h2>
-        <div class="goals-targets">
-          <div>
-            <div class="circular-progress" data-value="68" style="background: conic-gradient(var(--accent) 244.8deg, #e0e0e0 0deg);">
-            </div>
-            <p>Donor Retention</p>
+      
+      <div class="dashboard-card">
+        <h2>Campaign Performance</h2>
+        <div class="stat-grid">
+          <div class="stat-item">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Active Campaigns</div>
           </div>
-          <div>
-            <div class="circular-progress" data-value="45" style="background: conic-gradient(var(--accent) 162deg, #e0e0e0 0deg);">
+          <div class="stat-item">
+            <div class="stat-value">87%</div>
+            <div class="stat-label">Avg. Goal Progress</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">3,456</div>
+            <div class="stat-label">Total Participants</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">$42</div>
+            <div class="stat-label">Cost per Donor</div>
+          </div>
+        </div>
+        <div class="chart-container">
+          <canvas id="campaignChart"></canvas>
+        </div>
+      </div>
+      
+      <div class="dashboard-card">
+        <h2>AI Insights</h2>
+        <div class="ai-insights">
+          <h3>Recommendations</h3>
+          <ul>
+            <li>Increase email frequency for the "Summer Fundraiser" campaign to boost engagement.</li>
+            <li>Consider launching a matching gift program to incentivize larger donations.</li>
+            <li>Personalize donation pages for returning donors to improve conversion rates.</li>
+          </ul>
+        </div>
+        <div class="ai-insights">
+          <h3>Predictive Analytics</h3>
+          <ul>
+            <li>Projected 15% increase in donations over the next quarter.</li>
+            <li>High likelihood of donor churn for 87 inactive supporters. Consider a re-engagement campaign.</li>
+            <li>Optimal donation ask amount for your average donor: $75 - $100.</li>
+          </ul>
+        </div>
+        <button class="btn btn-primary">Generate Detailed AI Report</button>
+      </div>
+      
+      <div class="dashboard-card">
+        <h2>Recent Activities</h2>
+        <div class="recent-activities">
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i>💰</i>
             </div>
-            <p>Average Donation</p>
+            <div class="activity-details">
+              <div>New donation of $500 received</div>
+              <div class="activity-time">2 minutes ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i>🚀</i>
+            </div>
+            <div class="activity-details">
+              <div>"Clean Water Initiative" campaign launched</div>
+              <div class="activity-time">1 hour ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i>📊</i>
+            </div>
+            <div class="activity-details">
+              <div>Monthly donation report generated</div>
+              <div class="activity-time">3 hours ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">
+              <i>🤝</i>
+            </div>
+            <div class="activity-details">
+              <div>New corporate partnership established</div>
+              <div class="activity-time">1 day ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Donation Overview Chart
+    var donationCtx = document.getElementById('donationChart').getContext('2d');
+    var donationChart = new Chart(donationCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Donations ($)',
+          data: [12000, 19000, 15000, 25000, 22000, 30000],
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+
+    // Campaign Performance Chart
+    var campaignCtx = document.getElementById('campaignChart').getContext('2d');
+    var campaignChart = new Chart(campaignCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Campaign A', 'Campaign B', 'Campaign C', 'Campaign D', 'Campaign E'],
+        datasets: [{
+          label: 'Progress (%)',
+          data: [75, 92, 60, 85, 70],
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          borderColor: 'rgb(54, 162, 235)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        }
+      }
+    });
+
+    // Simulate real-time updates
+    setInterval(() => {
+      // Update donation total
+      let currentTotal = parseFloat(document.querySelector('.stat-value').textContent.replace('$', '').replace(',', ''));
+      let newTotal = currentTotal + Math.random() * 100;
+      document.querySelector('.stat-value').textContent = '$' + newTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+      // Add new donation to chart
+      let newDonation = Math.floor(Math.random() * 5000) + 1000;
+      donationChart.data.labels.push('New');
+      donationChart.data.datasets[0].data.push(newDonation);
+      if (donationChart.data.labels.length > 7) {
+        donationChart.data.labels.shift();
+        donationChart.data.datasets[0].data.shift();
+      }
+      donationChart.update();
+
+      // Update campaign progress
+      let randomCampaign = Math.floor(Math.random() * 5);
+      campaignChart.data.datasets[0].data[randomCampaign] += Math.random() * 5;
+      if (campaignChart.data.datasets[0].data[randomCampaign] > 100) {
+        campaignChart.data.datasets[0].data[randomCampaign] = 100;
+      }
+      campaignChart.update();
+
+      // Add new activity
+      let activities = [
+        {icon: '💰', text: 'New donation of $' + newDonation + ' received'},
+        {icon: '🎉', text: 'Campaign goal reached for "Campaign ' + String.fromCharCode(65 + randomCampaign) + '"'},
+        {icon: '✉️', text: 'New donor newsletter sent'},
+        {icon: '🤝', text: 'New volunteer signed up'}
+      ];
+      let newActivity = activities[Math.floor(Math.random() * activities.length)];
+      let activityHTML = `
+        <div class="activity-item">
+          <div class="activity-icon">
+            <i>${newActivity.icon}</i>
+          </div>
+          <div class="activity-details">
+            <div>${newActivity.text}</div>
+            <div class="activity-time">Just now</div>
+          </div>
+        </div>
+      `;
+      document.querySelector('.recent-activities').insertAdjacentHTML('afterbegin', activityHTML);
+      if (document.querySelectorAll('.activity-item').length > 5) {
+        document.querySelector('.activity-item:last-child').remove();
+      }
+    }, 5000);
+  </script>
+</body>
+</html>
