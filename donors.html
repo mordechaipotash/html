@@ -1,0 +1,506 @@
+<html><head><title>DonorShip AI - Enhanced Donor Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0A2647;
+    --secondary: #144272;
+    --accent: #2C74B3;
+    --light: #205295;
+    --background: #f5f7fa;
+    --text: #333;
+    --card-bg: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body, html {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  header {
+    background-color: var(--primary);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+  }
+
+  nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  nav ul li a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .search-filter-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-bar input {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+    width: 250px;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+
+  .search-bar input:focus {
+    background-color: rgba(255,255,255,0.2);
+    outline: none;
+  }
+
+  .search-bar input::placeholder {
+    color: rgba(255,255,255,0.7);
+  }
+
+  .filter-icon {
+    background-color: var(--accent);
+    color: white;
+    padding: 10px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .filter-icon:hover {
+    background-color: var(--secondary);
+  }
+
+  .filter-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 1000;
+  }
+
+  .filter-dropdown.active {
+    display: block;
+  }
+
+  .filter-option {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .filter-option:hover {
+    background-color: var(--background);
+  }
+
+  .donor-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .donor-table th, .donor-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .donor-table th {
+    background-color: var(--light);
+    color: white;
+    font-weight: 500;
+  }
+
+  .donor-table tr:hover {
+    background-color: #f5f5f5;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: 500;
+    margin-right: 5px;
+  }
+
+  .btn-primary {
+    background-color: var(--accent);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--secondary);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background-color: #e0e0e0;
+    color: var(--text);
+  }
+
+  .btn-secondary:hover {
+    background-color: #c0c0c0;
+    transform: translateY(-2px);
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid var(--accent);
+    background-color: white;
+    color: var(--accent);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .pagination button:hover, .pagination button.active {
+    background-color: var(--accent);
+    color: white;
+  }
+
+  .page-info {
+    margin: 0 10px;
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  .modal-content {
+    background-color: var(--card-bg);
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .tab:hover {
+    background-color: #f5f5f5;
+  }
+
+  .tab.active {
+    border-bottom: 2px solid var(--accent);
+    font-weight: 500;
+  }
+
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress {
+    height: 100%;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .header-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    nav ul {
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .search-filter-container {
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    .search-bar input {
+      width: 100%;
+    }
+
+    .donor-table {
+      font-size: 14px;
+    }
+
+    .donor-table th, .donor-table td {
+      padding: 10px;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">DonorShip AI</div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="donors.html">Donors</a></li>
+            <li><a href="campaigns.html">Campaigns</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="/settings">Settings</a></li>
+          </ul>
+        </nav>
+      <div class="search-filter-container">
+        <div class="search-bar">
+          <input type="text" placeholder="Search donors..." id="searchInput">
+        </div>
+        <div class="filter-icon" id="filterIcon">
+          <i class="fas fa-filter"></i>
+        </div>
+        <div class="filter-dropdown" id="filterDropdown">
+          <div class="filter-option">Filter by Donation Amount</div>
+          <div class="filter-option">Filter by Last Donation Date</div>
+          <div class="filter-option">Filter by Engagement Level</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Donor Management</h1>
+    <table class="donor-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Total Donated</th>
+          <th>Donations</th>
+          <th>Retention Score</th>
+          <th>Last Donation Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John Doe</td>
+          <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d0babfb8beb4bfb590b5a8b1bda0bcb5feb3bfbd">[email&#160;protected]</a></td>
+          <td>$1,250</td>
+          <td>5</td>
+          <td>
+            <div class="progress-bar">
+              <div class="progress" style="width: 85%;"></div>
+            </div>
+            85%
+          </td>
+          <td>2023-06-30</td>
+          <td>
+            <button class="btn btn-primary" title="Contact John Doe">Contact</button>
+            <button class="btn btn-secondary view-profile" title="View John Doe's profile" data-donor="John Doe">View Profile</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Jane Smith</td>
+          <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4beb5bab1a7b9bda0bc94b1acb5b9a4b8b1fab7bbb9">[email&#160;protected]</a></td>
+          <td>$3,500</td>
+          <td>8</td>
+          <td>
+            <div class="progress-bar">
+              <div class="progress" style="width: 92%;"></div>
+            </div>
+            92%
+          </td>
+          <td>2023-07-15</td>
+          <td>
+            <button class="btn btn-primary" title="Contact Jane Smith">Contact</button>
+            <button class="btn btn-secondary view-profile" title="View Jane Smith's profile" data-donor="Jane Smith">View Profile</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Robert Johnson</td>
+          <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e69489848394928c898e88958988a6839e878b968a83c885898b">[email&#160;protected]</a></td>
+          <td>$750</td>
+          <td>3</td>
+          <td>
+            <div class="progress-bar">
+              <div class="progress" style="width: 78%;"></div>
+            </div>
+            78%
+          </td>
+          <td>2023-05-20</td>
+          <td>
+            <button class="btn btn-primary" title="Contact Robert Johnson">Contact</button>
+            <button class="btn btn-secondary view-profile" title="View Robert Johnson's profile" data-donor="Robert Johnson">View Profile</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <button>&laquo; Previous</button>
+      <button class="active">1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>4</button>
+      <button>5</button>
+      <button>Next &raquo;</button>
+      <span class="page-info">Page 1 of 5</span>
+    </div>
+  </div>
+
+  <div id="donorModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modalDonorName"></h2>
+      <div class="tabs">
+        <div class="tab active" data-tab="details">Donor Details</div>
+        <div class="tab" data-tab="history">Donation History</div>
+        <div class="tab" data-tab="engagement">Engagement Metrics</div>
+      </div>
+      <div id="detailsTab" class="tab-content active">
+        <p>Donor details will be displayed here.</p>
+      </div>
+      <div id="historyTab" class="tab-content">
+        <p>Donation history will be displayed here.</p>
+      </div>
+      <div id="engagementTab" class="tab-content">
+        <p>Engagement metrics will be displayed here.</p>
+      </div>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  <script>
+    // Filter dropdown functionality
+    const filterIcon = document.getElementById('filterIcon');
+    const filterDropdown = document.getElementById('filterDropdown');
+
+    filterIcon.addEventListener('click', () => {
+      filterDropdown.classList.toggle('active');
+    });
+
+    // Close the dropdown when clicking outside
+    window.addEventListener('click', (event) => {
+      if (!event.target.matches('.filter-icon') && !event.target.matches('.fa-filter')) {
+        filterDropdown.classList.remove('active');
+      }
+    });
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const donorRows = document.querySelectorAll('.donor-table tbody tr');
+
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      donorRows.forEach(row => {
+        const donorName = row.querySelector('td:first-child').textContent.toLowerCase();
+        const donorEmail = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+        if (donorName.includes(searchTerm) || donorEmail.includes(searchTerm)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('donorModal');
+    const viewProfileButtons = document
